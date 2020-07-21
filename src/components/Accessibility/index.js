@@ -1,2 +1,2 @@
-import Accessibility from './Accessibility';
-export default Accessibility;
+import Pagination from './Accessibility';
+export default Pagination;

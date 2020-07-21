@@ -1,0 +1,9 @@
+.router-links {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.router-links li {
+  padding: 5px 15px;
+}

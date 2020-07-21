@@ -1,13 +1,12 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RouterLinks from '../RouterLinks';
+import ContextExample from '../ContextExample';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import store from '../../store';
 import './App.css';
-// import Accessibility from '../Accessibility/Accessibility';
 
-// LAZY LOADING & Router
-
-const Accessibility = lazy( () => import ('../Accessibility/Accessibility'));
+const Pagination = lazy( () => import ('../Accessibility/Accessibility'));
 
 const App = () => {
   return (
@@ -18,7 +17,9 @@ const App = () => {
           <Switch>
 
             <Route exact path="/">
-              <Accessibility props={store} />
+              <ErrorBoundary>
+                <Pagination props={store} />
+              </ErrorBoundary>
             </Route>
 
             <Route path="/link1">
@@ -32,6 +33,10 @@ const App = () => {
           </Switch>
         </Suspense>
       </Router>
+
+      <ErrorBoundary>
+        <ContextExample />
+      </ErrorBoundary>
     </div>
   );
 }

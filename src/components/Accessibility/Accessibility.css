@@ -10,7 +10,7 @@ ul,li {
 
 .image-list {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .img {
@@ -20,4 +20,14 @@ ul,li {
 .img img {
   width: 100%;
   height: 200px;
+}
+
+.pagin-list {
+  display: flex;
+  justify-content: center;
+}
+
+.pagin-list li a {
+  display: block;
+  padding:15px;
 }
