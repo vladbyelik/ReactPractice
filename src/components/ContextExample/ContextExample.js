@@ -10,7 +10,7 @@ const obj = {
 
 const LevelThree = () => (
   <TitleContext.Consumer>
-    { ({value, someVal, click}) => <h1 onClick={click}> {value}, {someVal} </h1> }
+    { ({value, someVal, click}) => <h3 onClick={click}> {value}, {someVal} </h3> }
   </TitleContext.Consumer>
 )
 
@@ -19,9 +19,9 @@ const LevelTwo = () => <LevelThree/>
 const LevelOne = () => <LevelTwo/>
 
 const ContextExample = () => (
-    <TitleContext.Provider value={obj}>
-      <LevelOne />
-    </TitleContext.Provider>
-  )
+  <TitleContext.Provider value={obj}>
+    <LevelOne />
+  </TitleContext.Provider>
+)
 
 export default ContextExample;

@@ -1,17 +1,16 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-export default class ErrorBoundary extends React.Component {
+export default class ErrorBoundary extends Component {
 
   state = {
     hasError: false
   }
 
-  componentDidCatch(error, info) {
+  componentDidCatch() {
     this.setState({hasError: true});
   }
 
   render() {
-
     if (this.state.hasError) {
       return (
         <div>

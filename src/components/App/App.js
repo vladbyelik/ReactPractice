@@ -18,7 +18,7 @@ const App = () => {
 
             <Route exact path="/">
               <ErrorBoundary>
-                <Pagination props={store.images} elementsOnPage={3} />
+                <Pagination props={store.images} elementsOnPage={2} />
               </ErrorBoundary>
             </Route>
 
