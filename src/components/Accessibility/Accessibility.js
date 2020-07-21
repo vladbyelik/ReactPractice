@@ -1,26 +1,27 @@
-import React, {Fragment, useState} from 'react';
+import React, {useState} from 'react';
 import './Accessibility.css';
 
 const Img = ({ src }) => (
-  <Fragment>
+  <>
     <img src={src} alt="alt-text"/>
     <span> Nature photo </span>
-  </Fragment>
+  </>
 )
 
-const Pagination = ({ props }) => {
+const Pagination = ({ props, elementsOnPage }) => {
 
-  const elementsOnPage = 3;
   const [state, setState] = useState(0);
-  const paginNums = Math.ceil( props.images.length / elementsOnPage );
-  const currArray = props.images.slice( elementsOnPage * state, elementsOnPage * state + elementsOnPage);
+  const paginNums = Math.ceil( props.length / elementsOnPage );
+  const currArray = props.slice( elementsOnPage * state, elementsOnPage * state + elementsOnPage);
   const numsArray = new Array(paginNums).fill('');
 
-  const PaginNums = ( numsArray ) => (
+  const changePage = (num) => () => setState( num );
+
+  const PaginNums = ( {numsArray} ) => (
     <ul className="pagin-list">
       { numsArray.map((_,num) => (
         <li key={num}>
-          <a onClick={ () => setState( num ) }
+          <a onClick={changePage(num)}
              href="#"> {num + 1} </a>
         </li>
       ))}
@@ -35,7 +36,7 @@ const Pagination = ({ props }) => {
           </li>
         ))}
       </ul>
-      <PaginNums nums={numsArray}/>
+      <PaginNums numsArray={numsArray}/>
     </>
   )
 }
