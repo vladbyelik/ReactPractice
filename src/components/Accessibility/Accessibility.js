@@ -11,22 +11,22 @@ const Img = ({ src }) => (
 const Pagination = ({ props }) => {
 
   const elementsOnPage = 3;
-  const [state, setState] = useState(1);
+  const [state, setState] = useState(0);
   const paginNums = Math.ceil( props.images.length / elementsOnPage );
-  const currArray = props.images.slice( elementsOnPage * state - elementsOnPage, elementsOnPage * state );
+  const currArray = props.images.slice( elementsOnPage * state, elementsOnPage * state + elementsOnPage);
 
   const PaginNums = ( {nums} ) => (
     <ul className="pagin-list">
       { new Array(nums).fill('').map((_,num) => (
         <li key={num}>
-          <a onClick={ () => setState( num + 1 ) }
+          <a onClick={ () => setState( num ) }
              href="#"> {num + 1} </a>
         </li>
       ))}
     </ul>)
 
   return (
-    <Fragment>
+    <>
       <ul className="image-list">
         {currArray.map((item, idx) => (
           <li key={idx} className="img">
@@ -35,7 +35,7 @@ const Pagination = ({ props }) => {
         ))}
       </ul>
       <PaginNums nums={paginNums}/>
-    </Fragment>
+    </>
   )
 }
 
