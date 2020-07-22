@@ -11,7 +11,7 @@ const RouterLinks = () => (
       <Link to="/link1">Link1</Link>
     </li>
     <li>
-      <Link to="/link2">Link2</Link>
+      <Link to="/link2">RefExample</Link>
     </li>
   </ul>
 )
