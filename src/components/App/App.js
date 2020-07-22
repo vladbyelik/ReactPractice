@@ -5,25 +5,30 @@ import ContextExample from '../ContextExample';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import store from '../../store';
 import './App.css';
+import NewPagin from '../NewPagin/NewPagin';
 
 const Pagination = lazy( () => import ('../Accessibility/Accessibility'));
+
+const Loading = () => <div>Загрузка...</div>;
 
 const App = () => {
   return (
     <div className="App">
       <Router>
       <RouterLinks />
-        <Suspense fallback={<div>Загрузка...</div>}>
+        <Suspense fallback={<Loading />}>
           <Switch>
 
             <Route exact path="/">
               <ErrorBoundary>
-                <Pagination props={store.images} elementsOnPage={2} />
+
+                <Pagination array={store.images} elements={3}/>
+                
               </ErrorBoundary>
             </Route>
 
             <Route path="/link1">
-              <div>Hello 1!</div>
+              <NewPagin array={store.images} elements={2}/>
             </Route>
 
             <Route path="/link2">
