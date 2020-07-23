@@ -1,10 +1,13 @@
-import React from 'react';
-import usePagination from '../usePagination';
+import React, {useState} from 'react';
 import './Accessibility.css';
 
-const Pagination = ({ array, elements }) => {
+const PaginOne = ( {props, elementsOnPage} ) => {
 
-  const [currArray, numsArray, selectPage] = usePagination(array, elements);
+  const [state, setState] = useState(0);
+  const paginNums = Math.ceil( props.length / elementsOnPage );
+  const currArray = props.slice( elementsOnPage * state, elementsOnPage * state + elementsOnPage );
+  const numsArray = new Array(paginNums).fill(null);
+  const selectPage = (num) => setState(num);
 
   const ElementsList = ( {currArray} ) => (
     <ul className="image-list">
@@ -20,7 +23,7 @@ const Pagination = ({ array, elements }) => {
     <ul className="pagin-list">
       {numsArray.map((_,num) => (
         <li key={num}>
-          <a onClick={() => selectPage(num)} href="#"> {num + 1} </a>
+          <button onClick={() => selectPage(num)}> {num + 1} </button>
         </li>
       ))}
     </ul>)
@@ -33,4 +36,4 @@ const Pagination = ({ array, elements }) => {
   )
 }
 
-export default Pagination;
+export default PaginOne;

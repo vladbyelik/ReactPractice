@@ -8,7 +8,7 @@ import RefExample from '../RefExample/RefExample';
 import store from '../../store';
 import './App.css';
 
-const Pagination = lazy( () => import ('../Accessibility/Accessibility'));
+const PaginOne = lazy( () => import ('../Accessibility/Accessibility'));
 
 const Loading = () => <div>Загрузка...</div>;
 
@@ -21,13 +21,13 @@ const App = () => (
 
           <Route exact path="/">
             <ErrorBoundary>
-              <Pagination array={store.images} elements={3}/>
+              <PaginOne props={store.images} elementsOnPage={3}/>
               <ContextExample />
             </ErrorBoundary>
           </Route>
 
           <Route path="/link1">
-            <NewPagin array={store.images} elements={2}/>
+            <NewPagin props={store.images} elementsOnPage={2}/>
           </Route>
 
           <Route path="/link2">

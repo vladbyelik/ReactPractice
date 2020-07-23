@@ -27,7 +27,7 @@ ul,li {
   justify-content: center;
 }
 
-.pagin-list li a {
-  display: block;
-  padding:15px;
+.pagin-list li button {
+  padding: 10px;
+  cursor: pointer;
 }
