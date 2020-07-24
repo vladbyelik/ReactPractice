@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './Accessibility.css';
+import './PaginOne.css';
 
 const PaginOne = ( {props, elementsOnPage} ) => {
 

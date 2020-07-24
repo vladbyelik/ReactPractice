@@ -8,10 +8,10 @@ const RouterLinks = () => (
       <Link to="/">Main</Link>
     </li>
     <li>
-      <Link to="/link1">Link1</Link>
+      <Link to="/link1">Modal window</Link>
     </li>
     <li>
-      <Link to="/link2">RefExample</Link>
+      <Link to="/link2">Ref - example</Link>
     </li>
   </ul>
 )
