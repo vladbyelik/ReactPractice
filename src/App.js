@@ -4,10 +4,11 @@ import RouterLinks from './components/RouterLinks';
 import ContextExample from './components/ContextExample';
 import ErrorBoundary from './components/ErrorBoundary';
 import CustomTextInput from './components/CustomTextInput/CustomTextInput';
-import store from './store';
-import './App.css';
 import MouseTracker from './components/MouseTracker';
 import ModalExample from './components/ModalExample';
+import Example from './components/Example/Example';
+import store from './store';
+import './App.css';
 
 const PaginOne = lazy( () => import ('./components/PaginOne'));
 
@@ -25,6 +26,8 @@ const App = () => {
             <ErrorBoundary>
               <PaginOne props={store.images} elementsOnPage={3}/>
               <ContextExample />
+              <Example />
+
             </ErrorBoundary>
           </Route>
 
