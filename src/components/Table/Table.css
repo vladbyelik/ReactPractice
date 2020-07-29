@@ -1,0 +1,38 @@
+.table {
+  border: 2px solid;
+  margin: 0 auto;
+  font-size: 25px;
+}
+
+.table thead {
+  border: 1px solid;
+  background-color: whitesmoke;
+}
+
+.table td {
+  border: 1px solid;
+}
+
+.table-nums-list {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.btn-num, .modal-btn {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+}
+
+.th-headline {
+  cursor: pointer;
+}
+
+.th-headline:last-child {
+  cursor: default;
+}
+
+.table-modal {
+  position: absolute;
+}

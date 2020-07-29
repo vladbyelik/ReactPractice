@@ -16,6 +16,9 @@ const RouterLinks = () => (
     <li>
       <Link to="/cat">Cat&Mouse</Link>
     </li>
+    <li>
+      <Link to="/table">Table</Link>
+    </li>
   </ul>
 )
 

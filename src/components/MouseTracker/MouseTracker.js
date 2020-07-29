@@ -6,7 +6,13 @@ class Cat extends Component {
     const mouse = this.props.mouse;
     const catPic = 'https://i.pinimg.com/originals/25/52/e2/2552e2334a5207a4d31306c6cf9f85b0.png';
     return (
-      <img src={catPic} alt="cat-pic" style={{width: '100px', height: '100px', position: 'absolute', left: mouse.x - 2, top: mouse.y - 2 }} />
+      <img src={catPic} 
+           alt="cat-pic" 
+           style={{width: '100px', 
+                   height: '100px', 
+                   position: 'absolute', 
+                   left: mouse.x - 2, top: mouse.y - 2 
+                 }} />
     );
   }
 }

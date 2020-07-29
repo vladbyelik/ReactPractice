@@ -12,7 +12,7 @@
   width: 350px;
   height: 200px;
   text-align: center;
-  flex-direction: column-reverse;
+  flex-direction: column;
 }
 
 .modal button {

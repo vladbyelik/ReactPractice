@@ -1,14 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './PaginOne.css';
+import { PaginLogic } from '../../utils/pagination';
 
 const PaginOne = ( {props, elementsOnPage} ) => {
 
-  const [state, setState] = useState(0);
-  const paginNums = Math.ceil( props.length / elementsOnPage );
-  const currArray = props.slice( elementsOnPage * state, elementsOnPage * state + elementsOnPage );
-  const numsArray = new Array(paginNums).fill(null);
-  const selectPage = (num) => setState(num);
-
+  const [currArray, numsArray, selectPage] = PaginLogic(props, elementsOnPage);
+  
   const ElementsList = ( {currArray} ) => (
     <ul className="image-list">
       {currArray.map((item, idx) => (

@@ -7,8 +7,9 @@ import CustomTextInput from './components/CustomTextInput/CustomTextInput';
 import MouseTracker from './components/MouseTracker';
 import ModalExample from './components/ModalExample';
 import Example from './components/Example/Example';
-import store from './store';
+import store from './utils/store';
 import './App.css';
+import Table from './components/Table';
 
 const PaginOne = lazy( () => import ('./components/PaginOne'));
 
@@ -44,6 +45,12 @@ const App = () => {
           <Route path="/cat">
             <ErrorBoundary>
               <MouseTracker />
+            </ErrorBoundary>
+          </Route>
+
+          <Route path="/table">
+            <ErrorBoundary>
+              <Table />
             </ErrorBoundary>
           </Route>
 
