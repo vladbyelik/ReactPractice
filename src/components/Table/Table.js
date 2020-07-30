@@ -10,39 +10,43 @@ class User extends React.Component {
     isModalOpen: false
   }
 
-  toggleSort = (prop) => {
-
-    console.log();
-
-    const newCurrArr = [];
-    return newCurrArr;
-    
+  constructor(props) {
+    super(props);
+    this.name = props.user.name;
+    this.surname = props.user.surname;
+    this.age = props.user.age;
   }
 
   toggleModal = () => !this.setState({ isModalOpen: !this.state.isModalOpen });
 
   render() {
+    return (
+      <>
+        <td> {this.name} </td>
+        <td> {this.surname} </td>
+        <td> {this.age} </td>
+        <td>
+          <button className="modal-btn" onClick={this.toggleModal}>...</button>
+          {this.state.isModalOpen && 
+          <Portal>
+            <div className="modal">
+              <button onClick={this.toggleModal}>Close</button>
+            </div>
+          </Portal>}
+        </td>
+      </>
+    )
+}}
 
+class Users extends React.Component {
+  render() {
     const { currArray } = this.props;
-
     return (
       <tbody>
         {currArray.map(user => {
           return (
             <tr key={user.key}>
-              <td>{user.name}</td>
-              <td>{user.surname}</td>
-              <td>{user.age}</td>
-              <td>
-                <button className="modal-btn" onClick={this.toggleModal}>...</button> 
-                {this.state.isModalOpen && 
-                <Portal>
-                  <div className="modal">
-                    <button onClick={this.toggleModal}>Close</button>
-                    <h3>Modal is open!</h3>
-                  </div>
-                </Portal>}
-              </td>
+              <User user={user} />
             </tr>
             )
           })}
@@ -51,14 +55,45 @@ class User extends React.Component {
   }
 }
 
-const Table = () => {
+const obj = [{
+  key: 23,
+  name: 'Vasya',
+  surname: 'Pupkin',
+  age: 23,
+},
+{
+  key: 21,
+  name: 'Vadfsfsya',
+  surname: 'Pupsdfsdfsdfkin',
+  age: 21,
+}]
 
-  const dots = <span>...</span>;
+const Table = () => {
 
   const [stateArr, setStateArr] = useState(users);
 
-  // sort function here...
+  const toggleSort = (propName) => setStateArr(() => {
 
+    switch (propName) {
+      case 'name':
+        console.log('this is name');
+        return [...obj];
+        
+      case 'surname':
+        console.log('this is surname');
+        return users.reverse();
+
+      case 'age':
+        console.log('this is age');
+        return users;
+
+      default:
+        break;
+    }
+
+  });
+
+  
   const [currArray, numsArray, selectPage] = PaginLogic(stateArr, 5);
 
   return (
@@ -66,7 +101,10 @@ const Table = () => {
       <ul className="table-nums-list">
         {numsArray.map((_,num) => (
           <li key={num}>
-            <button className="btn-num" onClick={() => selectPage(num)}> {num + 1} </button>
+            <button className="btn-num" 
+                    onClick={() => selectPage(num)}> 
+                      {num + 1} 
+            </button>
           </li>
         ))}
       </ul>
@@ -75,13 +113,13 @@ const Table = () => {
         <thead>
           <tr>
             {headers.map((headline,idx) => 
-              <th key={idx} className="th-headline">
-                { headline.isSortable ? headline.propName : dots }
+              <th key={idx} className="th-headline" onClick={() => toggleSort(headline.propName)}>
+                { headline.isSortable ? headline.propName : <span>...</span> }
               </th>)}
           </tr>
         </thead>
 
-        <User currArray={currArray} />
+        <Users currArray={currArray} />
 
       </table>
     </>
