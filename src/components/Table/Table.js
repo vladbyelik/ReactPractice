@@ -4,96 +4,86 @@ import { PaginLogic } from '../../utils/pagination';
 import { users, headers } from '../../utils/constants';
 import Portal from '../Portal';
 
-class User extends React.Component {
+const User = (props) => {
 
-  state = {
+  const [state, setState] = useState({
     isModalOpen: false
-  }
+  })
 
-  constructor(props) {
-    super(props);
-    this.name = props.user.name;
-    this.surname = props.user.surname;
-    this.age = props.user.age;
-  }
+  const toggleModal = () => setState({ isModalOpen: !state.isModalOpen });
 
-  toggleModal = () => !this.setState({ isModalOpen: !this.state.isModalOpen });
+  const {name, surname, age} = props.user;
 
-  render() {
-    return (
-      <>
-        <td> {this.name} </td>
-        <td> {this.surname} </td>
-        <td> {this.age} </td>
-        <td>
-          <button className="modal-btn" onClick={this.toggleModal}>...</button>
-          {this.state.isModalOpen && 
-          <Portal>
-            <div className="modal">
-              <button onClick={this.toggleModal}>Close</button>
-            </div>
-          </Portal>}
-        </td>
-      </>
-    )
-}}
-
-class Users extends React.Component {
-  render() {
-    const { currArray } = this.props;
-    return (
-      <tbody>
-        {currArray.map(user => {
-          return (
-            <tr key={user.key}>
-              <User user={user} />
-            </tr>
-            )
-          })}
-      </tbody>
-    )
-  }
+  return (
+    <>
+      <td> {name} </td>
+      <td> {surname} </td>
+      <td> {age} </td>
+      <td>
+        <button className="modal-btn" onClick={toggleModal}>...</button>
+        {state.isModalOpen && 
+        <Portal>
+          <div className="modal">
+            {name}
+            {surname}
+            {age}
+            <button onClick={toggleModal}>Close</button>
+          </div>
+        </Portal>}
+      </td>
+    </>
+  )
 }
 
-const obj = [{
-  key: 23,
-  name: 'Vasya',
-  surname: 'Pupkin',
-  age: 23,
-},
-{
-  key: 21,
-  name: 'Vadfsfsya',
-  surname: 'Pupsdfsdfsdfkin',
-  age: 21,
-}]
+const Users = (props) => {
+  return (
+    <tbody>
+      {props.currArray.map(user => {
+        return (
+          <tr key={user.key}>
+            <User user={user} />
+          </tr>
+          )
+        })}
+    </tbody>
+  )
+}
 
 const Table = () => {
 
   const [stateArr, setStateArr] = useState(users);
 
-  const toggleSort = (propName) => setStateArr(() => {
+  const [toggle, setToggle] = useState({toReverse: false}) 
+
+  const toggleSort = (propName) => {
+
+    setToggle({toReverse: !toggle.toReverse});
+
+    const sort = (prName) => setStateArr(
+      toggle.toReverse ? 
+        [...stateArr].sort((a,b) => a[prName].toUpperCase() > b[prName].toUpperCase() ? 1 : -1) :
+        [...stateArr].sort((a,b) => a[prName].toUpperCase() < b[prName].toUpperCase() ? 1 : -1));
+
+    const sortNum = (prName) => setStateArr(
+      toggle.toReverse ? 
+        [...stateArr].sort((a,b) => a[prName] - b[prName]) :
+        [...stateArr].sort((a,b) => b[prName] - a[prName]));
 
     switch (propName) {
       case 'name':
-        console.log('this is name');
-        return [...obj];
+        return sort('name');
         
       case 'surname':
-        console.log('this is surname');
-        return users.reverse();
+        return sort('surname');
 
       case 'age':
-        console.log('this is age');
-        return users;
+        return sortNum('age');
 
       default:
         break;
     }
+  };
 
-  });
-
-  
   const [currArray, numsArray, selectPage] = PaginLogic(stateArr, 5);
 
   return (
