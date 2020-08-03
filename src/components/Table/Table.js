@@ -1,115 +1,62 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './Table.css';
 import { PaginLogic } from '../../utils/pagination';
 import { users, headers } from '../../utils/constants';
-import Portal from '../Portal';
+import { useTable } from '../../utils/useTable';
+import TableModal from '../../utils/tableModal';
 
 const User = (props) => {
-
-  const [state, setState] = useState({
-    isModalOpen: false
-  })
-
-  const toggleModal = () => setState({ isModalOpen: !state.isModalOpen });
 
   const {name, surname, age} = props.user;
 
   return (
-    <>
+    <tr>
       <td> {name} </td>
       <td> {surname} </td>
       <td> {age} </td>
-      <td>
-        <button className="modal-btn" onClick={toggleModal}>...</button>
-        {state.isModalOpen && 
-        <Portal>
-          <div className="modal">
-            {name}
-            {surname}
-            {age}
-            <button onClick={toggleModal}>Close</button>
-          </div>
-        </Portal>}
-      </td>
-    </>
-  )
-}
-
-const Users = (props) => {
-  return (
-    <tbody>
-      {props.currArray.map(user => {
-        return (
-          <tr key={user.key}>
-            <User user={user} />
-          </tr>
-          )
-        })}
-    </tbody>
+      <TableModal props={props.user}/>
+    </tr>
   )
 }
 
 const Table = () => {
 
-  const [stateArr, setStateArr] = useState(users);
-
-  const [toggle, setToggle] = useState({toReverse: false}) 
-
-  const toggleSort = (propName) => {
-
-    setToggle({toReverse: !toggle.toReverse});
-
-    const sort = (prName) => setStateArr(
-      toggle.toReverse ? 
-        [...stateArr].sort((a,b) => a[prName].toUpperCase() > b[prName].toUpperCase() ? 1 : -1) :
-        [...stateArr].sort((a,b) => a[prName].toUpperCase() < b[prName].toUpperCase() ? 1 : -1));
-
-    const sortNum = (prName) => setStateArr(
-      toggle.toReverse ? 
-        [...stateArr].sort((a,b) => a[prName] - b[prName]) :
-        [...stateArr].sort((a,b) => b[prName] - a[prName]));
-
-    switch (propName) {
-      case 'name':
-        return sort('name');
-        
-      case 'surname':
-        return sort('surname');
-
-      case 'age':
-        return sortNum('age');
-
-      default:
-        break;
-    }
-  };
-
-  const [currArray, numsArray, selectPage] = PaginLogic(stateArr, 5);
+  const [filteredUsers, filter, toggleSort] = useTable(users);
+  const [currArray, numsArray, selectPage] = PaginLogic(filteredUsers, 7);
 
   return (
     <>
       <ul className="table-nums-list">
         {numsArray.map((_,num) => (
           <li key={num}>
-            <button className="btn-num" 
-                    onClick={() => selectPage(num)}> 
-                      {num + 1} 
+            <button 
+              className="btn-num"
+              onClick={() => selectPage(num)}>
+                {num + 1}
             </button>
           </li>
         ))}
       </ul>
 
+      <form>
+        <input type="text" placeholder='search by name' onChange={(e) => filter(e.target.value)} />
+      </form>
+
       <table className="table">
         <thead>
           <tr>
-            {headers.map((headline,idx) => 
-              <th key={idx} className="th-headline" onClick={() => toggleSort(headline.propName)}>
-                { headline.isSortable ? headline.propName : <span>...</span> }
+            {headers.map((headline,idx) =>
+              <th key={idx} 
+                  className="th-headline" 
+                  onClick={() => toggleSort(headline.propName)}>
+                    {headline.isSortable ? headline.propName : <span>...</span>}
               </th>)}
           </tr>
         </thead>
 
-        <Users currArray={currArray} />
+        <tbody>
+          {currArray.map(user => <User key={user.key} user={user} />)}
+        </tbody>
 
       </table>
     </>
