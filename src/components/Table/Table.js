@@ -1,9 +1,9 @@
 import React from 'react';
-import './Table.css';
 import { PaginLogic } from '../../utils/pagination';
 import { users, headers } from '../../utils/constants';
 import { useTable } from '../../utils/useTable';
 import TableModal from '../../utils/tableModal';
+import './Table.css';
 
 const User = (props) => {
 
@@ -17,7 +17,7 @@ const User = (props) => {
       <TableModal props={props.user}/>
     </tr>
   )
-}
+};
 
 const Table = () => {
 
