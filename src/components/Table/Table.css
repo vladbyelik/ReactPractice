@@ -35,4 +35,12 @@
 
 .table-modal {
   position: absolute;
+  top: 275px;
+  right: 200px;
+  background-color: #b1a1a1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  height: 100px;
 }

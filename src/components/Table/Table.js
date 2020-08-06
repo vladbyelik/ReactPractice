@@ -1,23 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PaginLogic } from '../../utils/pagination';
 import { users, headers } from '../../utils/constants';
 import { useTable } from '../../utils/useTable';
 import TableModal from '../../utils/tableModal';
 import './Table.css';
 
-const User = (props) => {
+// const User = (props) => {
 
-  const {name, surname, age} = props.user;
+//   const {name, surname, age} = props.user;
+
+//   return (
+//     <tr>
+//       <td> {name} </td>
+//       <td> {surname} </td>
+//       <td> {age} </td>
+//       <TableModal props={props.user}/>
+//     </tr>
+//   )
+// };
+
+const Users = (props) => {
+  
+  const {currArray} = props;
+
+  const [state, setState] = useState(currArray);
+
+  const editItem = (key) => {
+    console.log(key);
+  };
+
+  const deleteItem = (key, arr) => {
+    const newArr = arr.filter(item => item.key !== key);
+    setState(newArr);
+  };
 
   return (
-    <tr>
-      <td> {name} </td>
-      <td> {surname} </td>
-      <td> {age} </td>
-      <TableModal props={props.user}/>
-    </tr>
+    <tbody>
+      {state.map(user => {
+        const {key, name, surname, age} = user;
+        return (
+          <tr key={key}>
+            <td> {name} </td>
+            <td> {surname} </td>
+            <td> {age} </td>
+            <TableModal props={user} deleteItem={() => deleteItem(key, state)} editItem={editItem}/>
+          </tr>)}
+        )}
+    </tbody>
   )
-};
+}
 
 const Table = () => {
 
@@ -43,6 +74,7 @@ const Table = () => {
       </form>
 
       <table className="table">
+      
         <thead>
           <tr>
             {headers.map((headline,idx) =>
@@ -54,9 +86,7 @@ const Table = () => {
           </tr>
         </thead>
 
-        <tbody>
-          {currArray.map(user => <User key={user.key} user={user} />)}
-        </tbody>
+        <Users currArray={currArray}/>
 
       </table>
     </>
