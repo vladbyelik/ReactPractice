@@ -7,8 +7,6 @@ const TableModal = (props) => {
 
   const {editItem, deleteItem} = props;
 
-  // console.log(deleteItem);
-
   const [state, setState] = useState({isModalOpen: false});
 
   const toggleModal = () => setState({isModalOpen: !state.isModalOpen});
@@ -19,10 +17,12 @@ const TableModal = (props) => {
         {state.isModalOpen && 
         <Portal>
           <div className="table-modal">
-
-            <button onClick={() => editItem(key)}>Edit</button>
+            <button>Edit</button>
             <button onClick={() => deleteItem(key)}>Delete</button>
             <button onClick={toggleModal}>Close</button>
+
+            <input type="text" value={name} onChange={(e) => editItem(e.target.value, key)}/>
+
 
           </div>
         </Portal>}

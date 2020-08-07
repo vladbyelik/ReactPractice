@@ -35,9 +35,25 @@ export const useTable = (props) => {
     }
   };
 
+  const editItem = (text, key) => {
+    console.log(text);
+
+    const items = stateArr;
+    items.map(item => {
+      if(item.key === key) {
+        item.text = text;
+      }
+    })
+    
+    setStateArr(items);
+
+  };
+
+  const deleteItem = (key) => setStateArr( stateArr.filter(item => item.key !== key) );
+
   const filter = (eventValue) => setSearch(eventValue);
   
   const filteredUsers = stateArr.filter(user => user.name.toUpperCase().includes(search.toUpperCase()));
 
-  return [filteredUsers, filter, toggleSort];
+  return [filteredUsers, filter, toggleSort, editItem, deleteItem];
 }

@@ -8,8 +8,9 @@ import MouseTracker from './components/MouseTracker';
 import ModalExample from './components/ModalExample';
 import Example from './components/Example/Example';
 import store from './utils/store';
-import './App.css';
 import Table from './components/Table';
+import './App.css';
+
 
 const PaginOne = lazy( () => import ('./components/PaginOne'));
 
@@ -17,7 +18,7 @@ const Loading = () => <div>Загрузка...</div>;
 
 const App = () => {
   return (
-  (<div className="App">
+  <div className="App">
     <Router>
     <RouterLinks />
       <Suspense fallback={<Loading />}>
@@ -28,7 +29,6 @@ const App = () => {
               <PaginOne props={store.images} elementsOnPage={3}/>
               <ContextExample />
               <Example />
-
             </ErrorBoundary>
           </Route>
 
@@ -58,7 +58,6 @@ const App = () => {
       </Suspense>
     </Router>
   </div>)
-  )
 };
 
 export default App;
