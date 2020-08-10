@@ -36,14 +36,14 @@ export const useTable = (props) => {
   };
 
   const editItem = (text, key) => {
-    console.log(text);
 
     const items = stateArr;
+    
     items.map(item => {
       if(item.key === key) {
         item.text = text;
       }
-    })
+    });
     
     setStateArr(items);
 
