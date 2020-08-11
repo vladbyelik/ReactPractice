@@ -9,38 +9,43 @@ const Table = () => {
 
   const [filteredUsers, filter, toggleSort, editItem, deleteItem] = useTable(users);
 
-  const [currArray, numsArray, selectPage] = PaginLogic(filteredUsers, 7);
+  const [currArray, numsArray, selectPage] = PaginLogic(filteredUsers, 5);
 
   const Users = () => {
 
     return (
-      <table className="table">
+      <>
+        {currArray.length === 0 
+          ? <h2> Sorry, name not found =( </h2>
+          : <table className="table">
 
-        <thead>
-          <tr>
-            {headers.map(headline =>
-              <th key={headline.propName} 
-                  className="th-headline" 
-                  onClick={() => toggleSort(headline.propName)}>
-                    {headline.isSortable ? headline.propName : <span>...</span>}
-              </th>)}
-          </tr>
-        </thead>
+              <thead>
+                <tr>
+                  {headers.map(headline =>
+                    <th key={headline.propName} 
+                        className="th-headline" 
+                        onClick={() => toggleSort(headline.propName)}>
+                          {headline.isSortable ? headline.propName : <span>...</span>}
+                    </th>)}
+                </tr>
+              </thead>
 
-        <tbody>
-          {currArray.map(user => {
-            const {key, name, surname, age} = user;
-            return (
-              <tr key={key}>
-                <td> {name} </td>
-                <td> {surname} </td>
-                <td> {age} </td>
-                <TableModal props={user} deleteItem={deleteItem} editItem={editItem}/>
-              </tr>)}
-            )}
-        </tbody>
-
-      </table>
+              <tbody>
+                {currArray.map(user => {
+                  const {key, name, surname, age} = user;
+                  return (
+                    <tr key={key}>
+                      <td> {name} </td>
+                      <td> {surname} </td>
+                      <td> {age} </td>
+                      <TableModal props={user} deleteItem={deleteItem} editItem={editItem}/>
+                    </tr>)}
+                  )}
+              </tbody>
+              
+            </table>
+          }
+      </>
   )}
 
   return (

@@ -35,18 +35,18 @@ export const useTable = (props) => {
     }
   };
 
-  const editItem = (text, key) => {
+  const editItem = (stateVal) => {
 
-    const items = stateArr;
-    
-    items.map(item => {
-      if(item.key === key) {
-        item.text = text;
+    for (let i = 0; i < stateArr.length; i++) {
+
+      if (stateArr[i].key === stateVal.key) {
+        let removed1 = stateArr.slice(0, i);
+        let removed2 = stateArr.slice(i + 1);
+        setStateArr([...removed1, stateVal, ...removed2]);
+        break;
       }
-    });
-    
-    setStateArr(items);
 
+    }
   };
 
   const deleteItem = (key) => setStateArr( stateArr.filter(item => item.key !== key) );
