@@ -3,18 +3,15 @@ import Portal from '../components/Portal';
 
 const TableModal = (props) => {
 
+  const [state, setState] = useState({isModalOpen: false});
+
+  const [stateVal, setStateVal] = useState(props.props);
+
   const {key} = props.props;
 
   const {editItem, deleteItem} = props;
 
-  const [state, setState] = useState({isModalOpen: false});
-
   const toggleModal = () => setState({isModalOpen: !state.isModalOpen});
-
-
-  /////////////////////////////////////////////////////////////////////////
-
-  const [stateVal, setStateVal] = useState(props.props)
 
   const handleChange = (event) => {
 
@@ -24,11 +21,7 @@ const TableModal = (props) => {
       ...stateVal,
       [name]: type === "number" ? +value : value
     });
-
   }
-
-  /////////////////////////////////////////////////////////////////////////
-
 
   return (
     <td>

@@ -10,9 +10,9 @@ export const useTable = (props) => {
 
     setToggle(!toggle);
 
-    const sortName = (prop) => {
-      const toggleSortName = (arr, k) => arr.sort((a,b) => k * (a[prop].toUpperCase() > b[prop].toUpperCase() ? 1 : -1));
-      return setStateArr(toggle ? toggleSortName(stateArr, 1) : toggleSortName(stateArr, -1));
+    const sortStr = (prop) => {
+      const toggleSortStr = (arr, k) => arr.sort((a,b) => k * (a[prop].toUpperCase() > b[prop].toUpperCase() ? 1 : -1));
+      return setStateArr(toggle ? toggleSortStr(stateArr, 1) : toggleSortStr(stateArr, -1));
     };
 
     const sortNum = (prop) => {
@@ -22,10 +22,10 @@ export const useTable = (props) => {
 
     switch (propName) {
       case 'name':
-        return sortName('name');
+        return sortStr('name');
         
       case 'surname':
-        return sortName('surname');
+        return sortStr('surname');
 
       case 'age':
         return sortNum('age');
@@ -37,23 +37,23 @@ export const useTable = (props) => {
 
   const editItem = (stateVal) => {
 
-    for (let i = 0; i < stateArr.length; i++) {
+    for (let idx = 0; idx < stateArr.length; idx++) {
 
-      if (stateArr[i].key === stateVal.key) {
-        let removed1 = stateArr.slice(0, i);
-        let removed2 = stateArr.slice(i + 1);
-        setStateArr([...removed1, stateVal, ...removed2]);
+      if (stateArr[idx].key === stateVal.key) {
+        const arrBefore = stateArr.slice(0, idx);
+        const arrAfter = stateArr.slice(idx + 1);
+        setStateArr([...arrBefore, stateVal, ...arrAfter]);
         break;
       }
 
     }
   };
 
-  const deleteItem = (key) => setStateArr( stateArr.filter(item => item.key !== key) );
+  const deleteItem = (key) => setStateArr(stateArr.filter(item => item.key !== key));
 
-  const filter = (eventValue) => setSearch(eventValue);
+  const searchItem = (eventValue) => setSearch(eventValue);
   
-  const filteredUsers = stateArr.filter(user => user.name.toUpperCase().includes(search.toUpperCase()));
-
-  return [filteredUsers, filter, toggleSort, editItem, deleteItem];
+  const filteredItems = stateArr.filter(user => user.name.toUpperCase().includes(search.toUpperCase()));
+  
+  return [filteredItems, searchItem, toggleSort, toggle, editItem, deleteItem];
 }

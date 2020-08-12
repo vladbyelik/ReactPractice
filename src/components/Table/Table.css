@@ -29,6 +29,21 @@
   cursor: pointer;
 }
 
+.th-headline span {
+  position: relative;
+  width: 125px;
+  display: block;
+}
+
+.thead-arrow::after {
+  content: '\2193';
+}
+
+.active.thead-arrow::after {
+  transform: rotate(180deg);
+  position: absolute;
+}
+
 .th-headline:last-child {
   cursor: default;
 }

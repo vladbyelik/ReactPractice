@@ -1,4 +1,4 @@
-// import React from 'react';
+import Randomizer from 'react-randomizer';
 
 export const optionTypeList  = ['Text', "Checkbox", "Radio", "Description"];
 
@@ -33,7 +33,7 @@ export const headers = [
   },
 ];
 
-export const users = [
+export const users = Randomizer.randomizeArray([
   {key: 0, name: 'Ivan', surname: 'Serg', age: 22 },
   {key: 1, name: 'Alex', surname: 'Ivan', age: 25 },
   {key: 2, name: 'Fedor', surname: 'Long', age: 20 },
@@ -70,4 +70,4 @@ export const users = [
   {key: 33, name: 'hAlex', surname: 'dIvan', age: 12 },
   {key: 34, name: 'jFedor', surname: 'aLong', age: 15 },
   {key: 35, name: 'kSerg', surname: 'sBill', age: 66 },
-];
+]);
