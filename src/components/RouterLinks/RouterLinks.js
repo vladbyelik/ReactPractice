@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './RouterLinks.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import "./RouterLinks.css";
 
 const RouterLinks = () => (
   <ul className="router-links">
@@ -17,9 +17,12 @@ const RouterLinks = () => (
       <Link to="/cat">Cat&Mouse</Link>
     </li>
     <li>
+      <Link to="/pdf">PDF&Excel</Link>
+    </li>
+    <li>
       <Link to="/table">Table</Link>
     </li>
   </ul>
-)
+);
 
 export default RouterLinks;
