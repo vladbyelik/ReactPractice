@@ -10,7 +10,8 @@ import Example from "./components/Example/Example";
 import store from "./utils/store";
 import Table from "./components/Table";
 import "./App.css";
-import PdfExcelEx from "./components/PdfExcelEx";
+import PdfExample1 from "./components/PdfExample1";
+import PdfExample2 from "./components/PdfExample2";
 
 const PaginOne = lazy(() => import("./components/PaginOne"));
 
@@ -49,7 +50,13 @@ const App = () => {
 
             <Route path="/pdf">
               <ErrorBoundary>
-                <PdfExcelEx />
+                <PdfExample1 />
+              </ErrorBoundary>
+            </Route>
+
+            <Route path="/pdf2">
+              <ErrorBoundary>
+                <PdfExample2 />
               </ErrorBoundary>
             </Route>
 

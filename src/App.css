@@ -7,6 +7,31 @@
   text-align: center;
 }
 
+.post{
+  background-color: rgb(194, 194, 194);
+  max-width: 800px;
+  width: 100%;
+  display: table;
+  margin: 0 auto;
+  padding: 20px 50px;
+}
+
+.post-text {
+  font-size: 20px;
+  text-align: left;
+}
+
+.table {
+  font-size: 20px;
+  border-collapse: collapse;
+  border: 2px solid;
+  margin-left: 0;
+}
+
+.table * {
+  padding: 5px;
+}
+
 li {
   list-style: none;
 }

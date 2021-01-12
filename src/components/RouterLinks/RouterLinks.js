@@ -20,6 +20,9 @@ const RouterLinks = () => (
       <Link to="/pdf">PDF&Excel</Link>
     </li>
     <li>
+      <Link to="/pdf2">PDF&Excel2</Link>
+    </li>
+    <li>
       <Link to="/table">Table</Link>
     </li>
   </ul>
